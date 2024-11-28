@@ -1,33 +1,38 @@
 # Python Prisma Boot
 
 ## Environment
+Normal Linux and macOS
 ```shell
 python -m venv .venv
 ```
+
+Ubuntu
+```
+apt-get update && apt install python3.10-venv
+```
+
 ```shell
 source .venv/bin/activate
 ```
-```shell
-touch .gitignore requirements.txt
-```
-
-## Dependencies
-
-```shell
-cat <<EOF > requirements.txt
-fastapi
-uvicorn
-pydantic
-prisma
-EOF
-```
 
 ## Setup
+### Install dependencies
 ```shell
-pip3 install -r requirements.txt
+pip install -r requirements.txt
 ```
+or
+
 ```shell
-prisma init --datasource-provider postgresql
+pip install -i https://pypi.tuna.tsinghua.edu.cn/simple -r requirements.txt
+```
+
+### Generate database types
+```shell
+cp .env.example .env
+```
+
+```shell
+prisma generate
 ```
 
 ## Run
@@ -39,6 +44,28 @@ uvicorn main:app --reload
 ```shell
 prisma db push
 ```
+
 ```shell
-prisma generate
+prisma db pull
+```
+
+## Docker
+### Build
+```shell
+docker build -t python-prisma -f Dockerfile .
+```
+
+### Run
+```shell
+docker rm -f python-app;docker run --env-file .env -p 8123:8000 -d --name python-app python-prisma:latest
+```
+or
+
+```shell
+docker-compose down && docker-compose up -d && docker image prune -f && docker-compose logs -f
+```
+
+## Test
+```shell
+curl http://localhost:8123
 ```
