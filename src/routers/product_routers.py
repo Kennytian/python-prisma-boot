@@ -12,7 +12,7 @@ logger = logging.getLogger(__name__)
 
 router = APIRouter()
 
-@router.get('api/products', response_model=List[Product], status_code=status.HTTP_200_OK)
+@router.get('/api/products', response_model=List[Product], status_code=status.HTTP_200_OK)
 async def get_products(product_service: ProductService = Depends()):
     """
     Get all products
@@ -23,7 +23,7 @@ async def get_products(product_service: ProductService = Depends()):
     return results
 
 
-@router.post('api/product', response_model=ProductCreate, status_code=status.HTTP_201_CREATED)
+@router.post('/api/product', response_model=ProductCreate, status_code=status.HTTP_201_CREATED)
 async def create_product(data: ProductCreate, product_service: ProductService = Depends()):
     """
     Create a product
