@@ -1,32 +1,39 @@
 # Python Prisma Boot
 
-## Environment
-Normal Linux and macOS
+## 1. Environment
+### 1.1 Create .venv
+General Linux 
 ```shell
 python -m venv .venv
+```
+
+macOS
+```shell
+python3 -m venv .venv
 ```
 
 Ubuntu
 ```
 apt-get update && apt install python3.10-venv
 ```
-
+### 1.2 Activate
 ```shell
 source .venv/bin/activate
 ```
 
-## Setup
-### Install dependencies
+## 2. Setup
+### 2.1 Install dependencies
 ```shell
 pip install -r requirements.txt
 ```
+
 or
 
 ```shell
 pip install -i https://pypi.tuna.tsinghua.edu.cn/simple -r requirements.txt
 ```
 
-### Generate database types
+### 2.2 Generate database types
 ```shell
 cp .env.example .env
 ```
@@ -35,12 +42,12 @@ cp .env.example .env
 prisma generate
 ```
 
-## Run
+## 3. Run
 ```shell
 uvicorn main:app --reload
 ```
 
-## Database
+## 4. Database
 ```shell
 prisma db push
 ```
@@ -49,13 +56,13 @@ prisma db push
 prisma db pull
 ```
 
-## Docker
-### Build
+## 5. Docker
+### 5.1 Build
 ```shell
 docker build -t python-prisma -f Dockerfile .
 ```
 
-### Run
+### 5.2 Run
 ```shell
 docker rm -f python-app;docker run --env-file .env -p 8123:8000 -d --name python-app python-prisma:latest
 ```
