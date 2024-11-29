@@ -7,12 +7,6 @@ from src.config.prisma_config import connect_db, disconnect_db
 from src.routers.product_routers import router as product_router
 
 
-class CreatePostDto(BaseModel):
-    title: str
-    content: Optional[str] = None
-    published: bool
-
-
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     try:
