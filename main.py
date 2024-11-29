@@ -19,9 +19,9 @@ async def lifespan(app: FastAPI):
 app = FastAPI(lifespan=lifespan)
 
 
-@app.get("/")
+@app.get("/", tags=["root"])
 async def read_root():
     return {"data": "Hello world from Python 👩‍❤️‍💋‍👨"}
 
 
-app.include_router(product_router)
+app.include_router(product_router, tags=["product"])
